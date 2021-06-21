@@ -35,7 +35,7 @@ class TweetDfExtractor:
 
     # an example function
     def find_statuses_count(self)->list:
-        statuses_count 
+        statuses_count = len
         
     def find_full_text(self)->list:
         text = 
@@ -43,10 +43,13 @@ class TweetDfExtractor:
     
     def find_sentiments(self, text)->list:
         
-        return polarity, self.subjectivity
+        return self.polarity, self.subjectivity
 
     def find_created_time(self)->list:
-       
+        created_at = []
+        for date in self.tweet_list:
+            created_at.append(date["created_at"])
+    
         return created_at
 
     def find_source(self)->list:
