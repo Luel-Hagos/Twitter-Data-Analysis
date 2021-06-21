@@ -42,8 +42,12 @@ class TweetDfExtractor:
         return full_text
     
     def find_sentiments(self, text)->list:
-        
-        return polarity, self.subjectivity
+        polarity, subjectivity = [], []
+        for txt in text:
+            t_blob = TextBlob(txt)
+            polarity += [t_blob.polarity]
+            subjectivity += [t_blob.subjectivity]
+        return polarity, subjectivity
 
     def find_created_time(self)->list:
         created_at = [date['created_at'] for date in self.tweets_list]
@@ -83,24 +87,26 @@ class TweetDfExtractor:
         return retweet_count
 
     def find_hashtags(self)->list:
-        hashtags =[hashtag['entiles']['hashtags'] for hashtag in self.tweets_list]
+        hashtags =[hashtag['entities']['hashtags'] for hashtag in self.tweets_list]
         return hashtags
 
     def find_mentions(self)->list:
-        mentions = 
-
+        mentions = [mention['entities']['user_mentions'] for mention in self.tweets_list]
+        return mentions
 
     def find_location(self)->list:
-        try:
-            location = self.tweets_list['user']['location']
-        except TypeError:
-            location = ''
-        
-        return location
+        locations = []
+        for locate in self.tweets_list:
+            try:
+                location = locate['user']['location']
+            except TypeError:
+                location = ''
+            locations += [location]
+        return locations
 
-    
-        
-        
+    def find_lang(self)->list:
+        langs = [lng['lang'] for lng in self.tweets_list]
+        return langs
     def get_tweet_df(self, save=False)->pd.DataFrame:
         """required column to be generated you should be creative and add more features"""
         
