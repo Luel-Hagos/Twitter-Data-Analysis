@@ -79,7 +79,8 @@ class TweetDfExtractor:
         return total_favourite
     
     def find_retweet_count(self)->list:
-        retweet_count = 
+        retweet_count = [retweet['retweet_count'] for retweet in self.tweets_list]
+        return retweet_count
 
     def find_hashtags(self)->list:
         hashtags =
