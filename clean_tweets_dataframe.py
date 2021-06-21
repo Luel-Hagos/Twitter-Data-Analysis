@@ -32,7 +32,6 @@ class Clean_Tweets:
         convert column to datetime
         """
         df = pd.to_datetime(df['created_at'], errors='coerce')
-        df = df[df['created_at'] >= '2020-12-31']
         return df
 
     def convert_to_numbers(self, df: pd.DataFrame) -> pd.DataFrame:
