@@ -75,7 +75,8 @@ class TweetDfExtractor:
         return isSensitive
 
     def find_favourite_count(self)->list:
-        
+        total_favourite = [favourite['user']['favourites_count'] for favourite in self.tweets_list]
+        return total_favourite
     
     def find_retweet_count(self)->list:
         retweet_count = 
