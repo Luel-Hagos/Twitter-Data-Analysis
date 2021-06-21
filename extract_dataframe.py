@@ -35,7 +35,8 @@ class TweetDfExtractor:
 
     # an example function
     def find_statuses_count(self)->list:
-        statuses_count = len
+        statuses_count = [status['statuses_count'] for status in self.tweets_list]
+        return statuses_count
         
     def find_full_text(self)->list: 
         full_text = [tweet["text"] for tweet in self.tweets_list]
@@ -60,6 +61,7 @@ class TweetDfExtractor:
     def find_screen_name(self)->list:
         screen_name = [s_name['user']['screen_name'] for s_name in self.tweets_list]
         return screen_name
+
     def find_followers_count(self)->list:
         followers_count = [follower['user']['followers_count'] for follower in self.tweets_list]
         return followers_count
@@ -107,7 +109,7 @@ class TweetDfExtractor:
     def find_lang(self)->list:
         langs = [lng['lang'] for lng in self.tweets_list]
         return langs
-        
+
     def get_tweet_df(self, save=False)->pd.DataFrame:
         """required column to be generated you should be creative and add more features"""
         
