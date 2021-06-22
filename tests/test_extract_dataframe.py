@@ -15,7 +15,6 @@ columns = ['created_at', 'source', 'original_text','clean_text', 'sentiment','po
 class TestTweetDfExtractor(unittest.TestCase):
     """
 		A class for unit-testing function in the fix_clean_tweets_dataframe.py file
-
 		Args:
         -----
 			unittest.TestCase this allows the new class to inherit
@@ -73,8 +72,8 @@ class TestTweetDfExtractor(unittest.TestCase):
     def test_find_retweet_count(self):
         self.assertEqual(self.df.find_retweet_count(), [612, 92, 1, 899, 20])
 
-    # def test_find_hashtags(self):
-    #     self.assertEqual(self.df.find_hashtags(), )
+    def test_find_hashtags(self):
+        self.assertEqual(self.df.find_hashtags(), [[], [], [{'text': 'red4research', 'indices': [103, 116]}], [], []])
 
     # def test_find_mentions(self):
     #     self.assertEqual(self.df.find_mentions(), )
@@ -84,5 +83,3 @@ class TestTweetDfExtractor(unittest.TestCase):
 
 if __name__ == '__main__':
 	unittest.main()
-
-    
