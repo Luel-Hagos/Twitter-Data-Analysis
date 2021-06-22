@@ -39,7 +39,12 @@ class TweetDfExtractor:
         return statuses_count
 
     def find_full_text(self)->list: 
-        full_text = [tweet["text"] for tweet in self.tweets_list]
+        full_text  = []
+        for tweet in self.tweets_list:
+            if 'retweeted_status' in tweet and 'extended_tweet' in tweet['retweeted_status']:
+                full_text += [tweet['retweeted_status']['extended_tweet']['full_text']]
+            else:
+                full_text += [tweet['text']]
         return full_text
     
     def find_sentiments(self, text)->list:
@@ -81,12 +86,22 @@ class TweetDfExtractor:
         return isSensitive
 
     def find_favourite_count(self)->list:
-        total_favourite = [favourite['user']['favourites_count'] for favourite in self.tweets_list]
+        total_favourite = []
+        for tweet in self.tweets_list:
+            if 'retweeted_status' in tweet:
+                total_favourite += [tweet['retweeted_status']['favorite_count']]
+            else:
+                total_favourite += [tweet['favorite_count']]
         return total_favourite
     
     def find_retweet_count(self)->list:
-        retweet_count = [retweet['retweet_count'] for retweet in self.tweets_list]
-        return retweet_count
+        total_retweet = []
+        for tweet in self.tweets_list:
+            if 'retweeted_status' in tweet:
+                total_retweet += [tweet['retweeted_status']['retweet_count']]
+            else:
+                total_retweet += [tweet['retweet_count']]
+        return total_retweet
 
     def find_hashtags(self)->list:
         hashtags =[hashtag['entities']['hashtags'] for hashtag in self.tweets_list]
